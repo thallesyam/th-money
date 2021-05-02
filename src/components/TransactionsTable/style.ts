@@ -31,7 +31,7 @@ export const Container = styled.div`
         color: var(--green);
       }
 
-      &.withdrawn {
+      &.withdraw {
         color: var(--red);
       }
     }
