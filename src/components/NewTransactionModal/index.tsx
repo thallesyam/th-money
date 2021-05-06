@@ -18,20 +18,26 @@ export function NewTransactionModal({
   onRequestClose,
 }: NewTransactionModalProps) {
   const { createTransaction } = useContext(TransactionsContext)
-  const [type, setType] = useState('deposity')
+  const [type, setType] = useState('deposit')
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
   const [amount, setAmount] = useState(0)
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       category,
       type,
     })
+
+    setTitle('')
+    setAmount(0)
+    setCategory('')
+    setType('deposit')
+    onRequestClose()
   }
 
   return (
@@ -68,8 +74,8 @@ export function NewTransactionModal({
         <TransactionTypeContainer>
           <RadioBox
             type="button"
-            onClick={() => setType('deposity')}
-            isActive={type === 'deposity'}
+            onClick={() => setType('deposit')}
+            isActive={type === 'deposit'}
             activeColor="green"
           >
             <img src={incomeImg} alt="Entrada" />
